@@ -1,0 +1,90 @@
+% !TEX root = SalemeZarek_ReporteIndividual_Mecanica.tex
+\documentclass[10pt,a4paper,twocolumn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+
+
+\usepackage[margin=2cm]{geometry}
+\setlength{\columnsep}{1cm}
+
+\begin{document}
+
+
+\twocolumn[
+  \begin{center}
+      \resizebox{3cm}{!}{\includegraphics{logo_amerike.png}}
+      \vspace{0.3cm}
+      
+      \Large \textbf{Universidad Amerike} \\
+      \large \textbf{Materia:} Mecánica \\
+      \large \textbf{Profesora:} Elizabeth Ruvalcaba \\
+      \large \textbf{Alumno:} Jorge Zarek Saleme Gómez \\
+      \vspace{0.4cm}
+      
+      \normalsize \textbf{Abstract} \\
+      \medskip
+      \parbox{0.85\textwidth}{\textit{Este reporte documenta cómo se implementa el uso de físicas mediante código en Unity 6.3 LTS a través del desarrollo de un juego de bolos. La mecánica principal analizada es el lanzamiento y deslizamiento de la bola de boliche, la cual aplica la segunda ley de Newton.}}
+      \vspace{0.6cm}
+  \end{center}
+]
+
+
+\section{Introducción}
+El proyecto es un juego de bolos donde el objetivo es superar cada nivel; esto se logra derribando ``X'' cantidad determinada de bolos según el nivel. Al ser de tipo arcade, la simulación de la física es aproximada, evitando simular físicas complejas que contemplan muchas más variables y propiedades. El principal objetivo del proyecto es lograr demostrar el uso de físicas aplicadas mediante programación. En este caso, el principio de física utilizado es la Segunda Ley de Newton, el cual aplica la desaceleración del objeto provocada por una fuerza externa, en este caso la fricción de la pista.
+
+Dado que, después del momento de lanzamiento, ya no existe una fuerza de empuje que impulse la bola hacia adelante, la ecuación se define únicamente por la fuerza de fricción actuando hacia el lado opuesto de la dirección en que se lanzó:
+\[ -\mu_k \cdot m \cdot g = m \cdot a \]
+
+\section{Marco Teórico}
+El comportamiento de la bola de boliche se desarrolló a través de dos áreas de la mecánica clásica: la dinámica y la cinemática.
+
+\subsection{Dinámica y Fuerza de Fricción}
+La Segunda Ley de Newton establece que el movimiento de un objeto en una dirección determinada se verá afectado por una fuerza externa. En este proyecto, esa fuerza externa es la fricción de la madera que existe en el plano sobre el cual se desliza la bola.
+
+Para calcular su efecto, igualamos la fuerza fundamental ($\sum F = m \cdot a$) con la fórmula de la fricción cinética ($f_k = \mu_k \cdot N$). La Fuerza Normal ($N$) es igual a la masa por la gravedad ($m \cdot g$). Al empujar en dirección contraria al avance de la bola, se le asigna un signo negativo:
+\[ -\mu_k \cdot (m \cdot g) = m \cdot a \]
+
+Debido a que la masa ($m$) se encuentra multiplicando en ambos lados de la igualdad, se cancela. Esto nos demuestra que la desaceleración no depende del peso de la bola, quedando la fórmula de la siguiente manera:
+\[ a = -\mu_k \cdot g \]
+
+\subsection{Cinemática}
+Para conocer la velocidad final de la bola en un segundo determinado mientras se va frenando de manera constante, podemos aplicar la fórmula de la cinemática:
+\[ v_f = v_i + a \cdot t \]
+
+En nuestro código, la fórmula de fricción cinética aproximada se representa calculando primero la desaceleración:
+\begin{center}
+\texttt{float \_deceleration = Friction * Gravity;}
+\end{center}
+
+En esta línea y el código en general no tomamos en cuenta la masa, porque al compararla con la normal de nuestra fórmula de fricción aproximada, notamos que la masa está en ambos lados, por lo que se cancela. Esto nos quiere decir que la aceleración y desaceleración son totalmente independientes de la masa del objeto.
+
+Para aplicar este freno, utilizamos la siguiente línea clave:
+\begin{center}
+\texttt{\_velocity -= \_velocity.normalized * \_deceleration * Time.fixedDeltaTime;}
+\end{center}La función \texttt{.normalized} convierte el vector de velocidad en un vector unitario, permitiendo que el cálculo de fricción simule un frenado gradual y no exagerado. De esta manera, aunque la velocidad original sea muy alta, la fricción mantiene una desaceleración constante sin producir frenados bruscos o poco realistas.
+
+\newpage
+Finalmente, esta fórmula se ve aplicada directamente en nuestra línea de código de traslación dentro de Unity:
+\begin{center}
+  \texttt{transform.position += \_velocity * Time.fixedDeltaTime;}
+\end{center}
+En dicho código obtenemos la última posición de nuestro objeto (la bola de boliche) y el código calcula cómo va perdiendo velocidad cada 0.02 segundos, hasta a una velocidad final de 0.
+
+\section{Metodología}
+
+
+\section{Resultados}
+
+
+\section{Conclusiones}
+
+
+\section{Referencias}
+
+
+\end{document}
