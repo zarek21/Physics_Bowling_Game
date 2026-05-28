@@ -27,7 +27,15 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        ChangeState(GameState.WaitingThrow);
+        string currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        if (currentScene == "BallSelectionScreen")
+        {
+            ChangeState(GameState.BallSelection);
+        }
+        else
+        {
+            ChangeState(GameState.WaitingThrow);
+        }
     }
 
     public void ChangeState(GameState newState)

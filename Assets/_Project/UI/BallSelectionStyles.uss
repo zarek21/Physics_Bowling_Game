@@ -1,0 +1,58 @@
+.RootContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.MenuPanel {
+  background-color: rgba(0, 0, 0, 0.45);
+  padding: 40px;
+  border-radius: 25px;
+  align-items: center;
+}
+
+.SelectionContainer {
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:center;
+}
+
+
+
+.PreviousButton, .NextButton {
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.PreviousButton:hover .ArrowIcon, .NextButton:hover .ArrowIcon {
+  -unity-background-image-tint-color: #dddddd;
+}
+
+.ArrowIcon {
+  width: 40px;
+  height: 40px;
+  -unity-background-scale-mode: scale-to-fit;
+  transition: -unity-background-image-tint-color 0.1s ease-in-out;
+}
+
+.LeftArrow {
+  background-image: url('project:/Assets/_Project/UI/arrow-left.svg');
+}
+
+.RightArrow {
+  background-image: url('project:/Assets/_Project/UI/arrow-right.svg');
+}
+
+.PlayButton{
+  font-size:60px;
+  width:310px;
+  margin-top: -30px;
+}
+
+
+

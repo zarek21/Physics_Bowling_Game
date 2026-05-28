@@ -1,0 +1,17 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Project/UI/BallSelectionStyles.uss?fileID=7433441132597879392&amp;guid=b465e2ef0607dba4a8385228540e419d&amp;type=3#BallSelectionStyles"/>
+    <Style src="project://database/Assets/_Project/UI/GlobalStyles.uss?fileID=7433441132597879392&amp;guid=c0b0587a9e32e6246b39a8cb2669a714&amp;type=3#GlobalStyles"/>
+    <ui:VisualElement name="RootContainer" class="RootContainer" style="flex-grow: 1;">
+        <ui:VisualElement name="MenuPanel" class="MenuPanel">
+            <ui:VisualElement name="SelectionContainer" class="SelectionContainer" style="margin-bottom: 50px;">
+                <ui:Button name="PreviousButton" class="PreviousButton">
+                    <ui:VisualElement class="ArrowIcon LeftArrow" picking-mode="Ignore"/>
+                </ui:Button>
+                <ui:Button name="NextButton" class="NextButton">
+                    <ui:VisualElement class="ArrowIcon RightArrow" picking-mode="Ignore"/>
+                </ui:Button>
+            </ui:VisualElement>
+            <ui:Button name="PlayButton" class="PlayButton" text="PLAY" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

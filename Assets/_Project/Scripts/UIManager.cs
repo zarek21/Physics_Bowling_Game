@@ -12,6 +12,23 @@ public class UIManager : MonoBehaviour
             GameManager.Instance.OnStateChanged += HandleStateChanged;
         }
 
+        // Si venimos de la escena de selección, instanciar el prefab seleccionado
+        if (BallSelector.SelectedBallPrefab != null)
+        {
+            var placeholders = FindObjectsByType<BallPhysics>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            Transform spawnTrans = placeholders.Length > 0 ? placeholders[0].transform : null;
+            Vector3 spawnPos = spawnTrans != null ? spawnTrans.position : Vector3.zero;
+            Quaternion spawnRot = spawnTrans != null ? spawnTrans.rotation : Quaternion.identity;
+
+            foreach (var p in placeholders) 
+            {
+                Destroy(p.gameObject);
+            }
+
+            var newBallObj = Instantiate(BallSelector.SelectedBallPrefab, spawnPos, spawnRot);
+            BallPhysics = newBallObj.GetComponent<BallPhysics>();
+        }
+
         if (BallPhysics == null)
         {
             BallPhysics = FindFirstObjectByType<BallPhysics>(FindObjectsInactive.Include);
