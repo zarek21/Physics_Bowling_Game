@@ -26,14 +26,18 @@ public class BallPhysics : MonoBehaviour
     private bool _isMoving;
 
     [Header("Apuntado")]
-    public float MouseSensitivity = 2f;
+    public float KeyboardAimSpeed = 30f;
     public float MaxAimAngle = 30f;
     
     private float _currentAimAngle = 0f;
     private bool _isLaunched = false;
+    private Rigidbody _rb;
+
+    public event System.Action OnBallLaunched;
 
     void Start()
     {
+        _rb = GetComponent<Rigidbody>();
         _velocity = Vector3.zero;
         _isMoving = false;
         _isLaunched = false;
@@ -43,11 +47,20 @@ public class BallPhysics : MonoBehaviour
     {
         if (_isLaunched) return;
 
-        if (Mouse.current == null) return;
+        float aimInput = 0f;
+        if (Keyboard.current != null)
+        {
+            if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
+            {
+                aimInput = -1f;
+            }
+            else if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
+            {
+                aimInput = 1f;
+            }
+        }
 
-        float _mouseInput = Mouse.current.delta.x.ReadValue();
-
-        _currentAimAngle += _mouseInput * MouseSensitivity * 0.05f;
+        _currentAimAngle += aimInput * KeyboardAimSpeed * Time.deltaTime;
         _currentAimAngle = Mathf.Clamp(_currentAimAngle, -MaxAimAngle, MaxAimAngle);
 
         Vector3 _aimDirection = Quaternion.Euler(0, _currentAimAngle, 0) * Force.normalized;
@@ -59,8 +72,7 @@ public class BallPhysics : MonoBehaviour
             AimLine.SetPosition(1, transform.position + _aimDirection * 5f);
         }
     
-    
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             LaunchBall(_aimDirection);
         }
@@ -73,13 +85,18 @@ public class BallPhysics : MonoBehaviour
             return;
         }
 
-        // Fórmula Dinámica: Desaceleración por fricción 
-        // La masa se omite porque se cancela
+        if (_rb != null)
+        {
+            _velocity = _rb.linearVelocity;
+        }
+
+        // Única ley física aplicada en el script: Desaceleración por fricción cinética
+        // Fórmula: a = μ * g
         float _deceleration = Friction * GRAVITY;
 
-        if(_velocity.magnitude > 0.1f)
+        if (_velocity.magnitude > 0.1f)
         {
-            // Fórmula Cinemática: vf = vi + a * t
+            // Fórmula Cinemática: vf = vi - a * t
             _velocity -= _velocity.normalized * _deceleration * Time.fixedDeltaTime;
         }
         else
@@ -88,8 +105,16 @@ public class BallPhysics : MonoBehaviour
             _velocity = Vector3.zero;
         }
 
-        transform.position += _velocity * Time.fixedDeltaTime;
+        if (_rb != null)
+        {
+            _rb.linearVelocity = _velocity;
+        }
+        else
+        {
+            transform.position += _velocity * Time.fixedDeltaTime;
+        }
 
+        // La rotación visual del giro se calcula a partir de la velocidad
         if (_velocity.magnitude > 0.01f && BallMesh != null)
         {
             float distanceTraveled = _velocity.magnitude * Time.fixedDeltaTime;
@@ -105,9 +130,34 @@ public class BallPhysics : MonoBehaviour
         _isMoving = true;
         _isLaunched = true;
 
+        if (_rb != null)
+        {
+            _rb.linearVelocity = _velocity;
+        }
+
         if(AimLine != null)
         {
             AimLine.enabled = false;
+        }
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.ChangeState(GameState.BowlSpinning);
+        }
+
+        OnBallLaunched?.Invoke();
+    }
+
+    public void SetFriction(float value)
+    {
+        Friction = value;
+    }
+
+    public void SetForceMagnitude(float value)
+    {
+        if (Force.magnitude > 0.001f)
+        {
+            Force = Force.normalized * value;
         }
     }
 }

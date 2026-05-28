@@ -2,11 +2,11 @@ using UnityEngine;
 using System;
 public enum GameState
 {
+    BallSelection,
     PauseMenu,
     WaitingThrow,
     BowlSpinning,
     Scoreboard
-
 }
 public class GameManager : MonoBehaviour
 {
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        CurrentState = GameState.WaitingThrow;
+        ChangeState(GameState.WaitingThrow);
     }
 
     public void ChangeState(GameState newState)

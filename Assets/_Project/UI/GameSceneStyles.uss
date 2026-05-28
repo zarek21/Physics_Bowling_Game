@@ -1,0 +1,151 @@
+.RootContainer {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 16px 20px;
+}
+
+.SliderContainer {
+    background-color: rgba(0, 0, 0, 0.88);
+    border-color: rgba(255, 255, 255, 0.12);
+    border-width: 2px;
+    border-radius: 20px;
+    padding: 20px 36px;
+    width: 98%;
+    max-width: 1500px;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.panel-title {
+    color: #E7E7E7;
+    font-size: 40px;
+    -unity-font-style: bold;
+    letter-spacing: 1.5px;
+    -unity-text-align: middle-center;
+    margin-bottom: 6px;
+    opacity: 0.9;
+}
+
+.level-force-label {
+    color: #C3D100;
+    font-size: 32px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    margin-bottom: 50px;
+    opacity: 0.95;
+    letter-spacing: 1.1px;
+}
+
+.panel-instructions {
+    color: #B6B6B6;
+    font-size: 40px;
+    -unity-text-align: middle-center;
+    margin-top: 14px;
+}
+
+.custom-slider {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 16px;
+    margin-top: 6px;
+}
+
+.custom-slider .unity-slider__label {
+    color: #B6B6B6;
+    font-size: 20px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    margin-bottom: -25px;
+    min-width: auto;
+}
+
+.custom-slider .unity-slider__input,
+.custom-slider .unity-base-slider__input {
+    width: 100%;
+    margin-bottom:50px;
+}
+
+.custom-slider .unity-slider__track {
+    background-color: rgba(93, 63, 211, 0.2);
+    border-radius: 8px;
+    height: 16px;
+    border-width: 1px;
+    border-color: rgba(157, 78, 221, 0.4);
+    top: 50%;
+    margin-top: -8px;
+}
+
+.custom-slider .unity-slider__dragger,
+.custom-slider .unity-base-slider__dragger {
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+    border-width: 2.5px;
+    border-color: #FFFFFF;
+    background-color: #ff3c00ff;
+    top: 50%;
+    margin-top: -16px;
+}
+
+/* --- Panel de Selección de Bola --- */
+.SelectionContainer {
+    background-color: rgba(0, 0, 0, 0.88);
+    border-color: rgba(255, 255, 255, 0.12);
+    border-width: 2px;
+    border-radius: 20px;
+    padding: 30px 40px;
+    width: 60%;
+    max-width: 800px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 80px;
+}
+
+.SelectionRow {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.arrow-button {
+    background-color: #FF8500;
+    color: #FFFFFF;
+    font-size: 36px;
+    width: 72px;
+    height: 72px;
+    border-radius: 36px;
+    border-width: 0;
+    -unity-font-style: bold;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.ball-name-label {
+    color: #FFFFFF;
+    font-size: 56px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    min-width: 250px;
+    letter-spacing: 2px;
+}
+
+.select-button {
+    background-color: #222222;
+    color: #FFFFFF;
+    font-size: 28px;
+    -unity-font-style: bold;
+    padding: 12px 48px;
+    border-radius: 12px;
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.2);
+}
