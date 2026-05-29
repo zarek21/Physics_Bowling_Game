@@ -487,11 +487,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BallSelector
   balls:
   - Name: ICE
-    Prefab: {fileID: 6848725940747936614, guid: 2415a0de934f0544789233a4f985d607, type: 3}
+    PreviewPrefab: {fileID: 6848725940747936614, guid: 2415a0de934f0544789233a4f985d607, type: 3}
+    GameplayPrefab: {fileID: 4021515558627868008, guid: 087413f1d86cddc4eae33b105f705cd4, type: 3}
   - Name: FIRE
-    Prefab: {fileID: 5856612779828789948, guid: 6a418f7ad4c31824787a4ac4827d7725, type: 3}
+    PreviewPrefab: {fileID: 5856612779828789948, guid: 6a418f7ad4c31824787a4ac4827d7725, type: 3}
+    GameplayPrefab: {fileID: 8108699647346133520, guid: 96b137ee1edea7141896e0a955948927, type: 3}
   - Name: PLASMA
-    Prefab: {fileID: 7809109253663261719, guid: 38a663c7179704941bc545203494f008, type: 3}
+    PreviewPrefab: {fileID: 7809109253663261719, guid: 38a663c7179704941bc545203494f008, type: 3}
+    GameplayPrefab: {fileID: 372977229605917182, guid: 9972bdb12fb45a1498124e9b2eaed8d7, type: 3}
 --- !u!114 &1954777702
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,12 +1,25 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/_Project/UI/GameScene/GameSceneStyles.uss?fileID=7433441132597879392&amp;guid=66cbbbd77d02836489178ece3b581563&amp;type=3#GameSceneStyles"/>
     <ui:VisualElement name="RootContainer" class="RootContainer">
-        <!-- Panel de Apuntado y Lanzamiento -->
-        <ui:VisualElement name="SlidersContainer" class="SliderContainer">
-            <ui:Label text="APUNTADO Y LANZAMIENTO" class="panel-title"/>
-            <ui:Label text="Fuerza Lanzamiento = " name="LevelForceLabel" class="level-force-label"/>
-            <ui:Slider label="Fricción" low-value="0.02" high-value="0.08" value="0.04" name="FrictionSlider" class="FrictionSlider custom-slider"/>
-            <ui:Label text="[ A/D ] Apuntar   •   [ Espacio ] Lanzar" class="panel-instructions"/>
+        <ui:VisualElement name="SliderContainer" class="SliderContainer">
+            <ui:VisualElement class="FrictionLabelContainer">
+                <ui:Label name="FrictionLabel" text="FRICCIÓN: 0.040" class="FrictionLabel"/>
+            </ui:VisualElement>
+            
+            <ui:Slider name="FrictionSlider" value="0.04" low-value="0.02" high-value="0.08" class="Slider"/>
+            
+            <ui:VisualElement name="InstructionsContainer" class="InstructionsContainer">
+                <ui:VisualElement class="InstructionRow">
+                    <ui:VisualElement class="KeyIcon AKey"/>
+                    <ui:VisualElement class="KeyIcon DKey"/>
+                    <ui:Label text="APUNTAR" class="InstructionText"/>
+                </ui:VisualElement>
+                
+                <ui:VisualElement class="InstructionRow" style="margin-right: 0;">
+                    <ui:VisualElement class="KeyIcon SpaceKey"/>
+                    <ui:Label text="LANZAR" class="InstructionText"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

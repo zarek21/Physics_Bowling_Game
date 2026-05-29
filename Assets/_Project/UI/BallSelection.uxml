@@ -11,7 +11,7 @@
                     <ui:VisualElement class="ArrowIcon RightArrow" picking-mode="Ignore"/>
                 </ui:Button>
             </ui:VisualElement>
-            <ui:Button name="PlayButton" class="PlayButton" text="PLAY" />
+            <ui:Button name="PlayButton" class="PlayButton" text="JUGAR" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

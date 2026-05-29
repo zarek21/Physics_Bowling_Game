@@ -23,41 +23,40 @@ public class BallRotation : MonoBehaviour
 
     void Start()
     {
-        // 1. Si estamos en el juego real, este script se autodestruye
-        // para no interferir con las físicas normales del lanzamiento.
+        
         if (SceneManager.GetActiveScene().name == "GameScene")
         {
             Destroy(this);
             return;
         }
 
-        // 2. Si estamos en la pantalla de selección:
+       
         _startPosition = transform.position;
 
-        // Calcular una dirección inicial para el radio del círculo
+      
         _orbitOffsetDirection = Vector3.Cross(RotationAxis, Vector3.up).normalized;
         if (_orbitOffsetDirection.sqrMagnitude < 0.001f) 
         {
             _orbitOffsetDirection = Vector3.Cross(RotationAxis, Vector3.right).normalized;
         }
 
-        // 3. Modificar el Rigidbody para que flote sin caerse
+       
         var rb = GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.isKinematic = true; // Desactiva las físicas para que quede flotando
+            rb.isKinematic = true; 
             rb.useGravity = false;
         }
     }
 
     void Update()
     {
-        // 1. Movimiento en círculo (Órbita) para mostrar el Trail
+        
         _currentAngle += RotationSpeed * Time.deltaTime;
         Quaternion orbitRotation = Quaternion.AngleAxis(_currentAngle, RotationAxis);
         transform.position = _startPosition + (orbitRotation * _orbitOffsetDirection * RotationSize);
 
-        // 2. Rotación de la bola sobre sí misma
+     
         transform.Rotate(SpinAxis * (SpinSpeed * Time.deltaTime), Space.Self);
     }
 }
