@@ -55,7 +55,7 @@ MonoBehaviour:
   Force: {x: 5, y: 0, z: 0}
   Friction: 0
   Radius: 0.11
-  KeyboardAimSpeed: 30
+  KeyboardAimSpeed: 5
   MaxAimAngle: 30
 --- !u!54 &1763781437698107911
 Rigidbody:
@@ -83,7 +83,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!135 &5004940401415335909
 SphereCollider:
   m_ObjectHideFlags: 0

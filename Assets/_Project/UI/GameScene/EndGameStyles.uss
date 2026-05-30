@@ -1,0 +1,71 @@
+.EndGameRoot {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.ModalContainer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.ModalContent {
+    width: 600px;
+    background-color: rgba(61, 26, 3, 0.95);
+    border-width: 4px;
+    border-color: #f79303;
+    border-radius: 24px;
+    padding: 40px;
+    align-items: center;
+}
+
+.ModalTitle {
+    font-size: 40px;
+    -unity-font-style: bold;
+    margin-bottom: 16px;
+    -unity-text-align: middle-center;
+}
+
+.WinTitle {
+    color: #ffd700;
+}
+
+.LoseTitle {
+    color: #ff3b30;
+}
+
+.ModalSubtitle {
+    color: #ffffff;
+    font-size: 20px;
+    margin-bottom: 36px;
+    -unity-text-align: middle-center;
+    white-space: normal;
+}
+
+.ModalButton {
+    background-color: #f79303;
+    color: #ffffff;
+    font-size: 22px;
+    -unity-font-style: bold;
+    border-width: 3px;
+    border-color: #ffffff;
+    border-radius: 28px;
+    padding: 14px 44px;
+}
+
+.ModalButton:hover {
+    background-color: #ffd700;
+    color: #3d1a03;
+}
+
+.ModalButton:active {
+    background-color: #e58502;
+}

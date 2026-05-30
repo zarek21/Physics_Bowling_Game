@@ -1,0 +1,22 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Project/UI/GameScene/EndGameStyles.uss"/>
+    <ui:VisualElement name="EndGameRoot" class="EndGameRoot" picking-mode="Ignore">
+        <!-- Pantalla de Victoria -->
+        <ui:VisualElement name="WinContainer" class="ModalContainer" style="display: none;">
+            <ui:VisualElement class="ModalContent">
+                <ui:Label text="VICTORIA" class="ModalTitle WinTitle"/>
+                <ui:Label text="¡Lograste detener la bola en la zona de victoria!" class="ModalSubtitle"/>
+                <ui:Button name="WinRetryButton" text="JUGAR DE NUEVO" class="ModalButton"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Pantalla de Derrota / Reintentar -->
+        <ui:VisualElement name="LoseContainer" class="ModalContainer" style="display: none;">
+            <ui:VisualElement class="ModalContent">
+                <ui:Label text="¡INTÉNTALO DE NUEVO!" class="ModalTitle LoseTitle"/>
+                <ui:Label text="La bola no se detuvo en la zona de victoria." class="ModalSubtitle"/>
+                <ui:Button name="RetryButton" text="REINTENTAR" class="ModalButton"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

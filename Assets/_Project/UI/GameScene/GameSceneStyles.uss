@@ -4,13 +4,13 @@
     position: absolute;
     justify-content: flex-end;
     align-items: center;
-    padding-bottom: 80px;
 }
 
 .SliderContainer {
     width: 750px;
     align-items: center;
     justify-content: center;
+    margin-bottom: 80px;
 }
 
 .Slider {
@@ -151,4 +151,135 @@
     -unity-font-style: bold;
     margin: 0;
     padding: 0;
+}
+
+.Hidden {
+    display: none;
+}
+
+.ModalContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.ModalContent {
+    width: 750px;
+    background-color: rgba(0, 0, 0, 0.45);
+    border-width: 3px;
+    border-color: #ffffff;
+    border-radius: 25px;
+    padding: 60px;
+    align-items: center;
+}
+
+.ModalTitle {
+    font-size: 52px;
+    -unity-font-style: bold;
+    margin-bottom: 45px;
+    -unity-text-align: middle-center;
+}
+
+.WinTitle {
+    color: #ffd700;
+}
+
+.LoseTitle {
+    color: #ff3b30;
+}
+
+.ModalButton {
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 26px;
+    -unity-font-style: bold;
+    border-width: 3px;
+    border-color: #ffffff;
+    border-radius: 15px;
+    padding: 0 30px;
+    width: auto;
+    min-width: 330px;
+    height: 70px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.ModalButton:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.ModalButton:active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.ResetThrowButton {
+    position: absolute;
+    left: 40px;
+    top: 40px;
+    background-color: rgba(61, 26, 3, 0.85);
+    color: #ffffff;
+    font-size: 24px;
+    -unity-font-style: bold;
+    border-width: 2px;
+    border-color: #f79303;
+    border-radius: 20px;
+    padding: 6px 35px;
+    transition: scale 0.15s ease-in-out;
+    width: 300px;
+    height: 50px;
+   
+}
+
+.ResetThrowButton:hover {
+    scale: 1.08;
+}
+
+.ResetThrowButton:active {
+    scale: 1;
+}
+
+.VictoryProgressContainer {
+    position: absolute;
+    top: 40px;
+    align-self: center;
+    width: 450px;
+    background-color: rgba(61, 26, 3, 0.85);
+    border-width: 2px;
+    border-color: #f79303;
+    border-radius: 15px;
+    padding: 15px 25px;
+    align-items: center;
+    justify-content: center;
+}
+
+.VictoryProgressLabel {
+    color: #ffffff;
+    font-size: 16px;
+    -unity-font-style: bold;
+    margin-bottom: 8px;
+    -unity-text-align: middle-center;
+}
+
+.VictoryProgressBarBg {
+    width: 100%;
+    height: 16px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    overflow: hidden;
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.VictoryProgressBarFill {
+    height: 100%;
+    background-color: #f79303;
+    border-radius: 8px;
+    transition: width 0.05s ease-out;
 }

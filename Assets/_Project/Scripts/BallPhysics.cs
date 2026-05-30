@@ -34,6 +34,7 @@ public class BallPhysics : MonoBehaviour
     private Rigidbody _rb;
 
     public event System.Action OnBallLaunched;
+    public event System.Action OnBallStopped;
 
     void Start()
     {
@@ -101,8 +102,13 @@ public class BallPhysics : MonoBehaviour
         }
         else
         {
-            _isMoving = false;
-            _velocity = Vector3.zero;
+            if (_isMoving)
+            {
+                _isMoving = false;
+                _velocity = Vector3.zero;
+                Debug.Log($"[BallPhysics] Bola se detuvo físicamente (velocidad < 0.2). Invocando OnBallStopped.");
+                OnBallStopped?.Invoke();
+            }
         }
 
         if (_rb != null)
@@ -129,6 +135,7 @@ public class BallPhysics : MonoBehaviour
         _velocity = direction * Force.magnitude;
         _isMoving = true;
         _isLaunched = true;
+        Debug.Log($"[BallPhysics] LaunchBall. Fuerza: {Force.magnitude} Dirección: {direction} Velocidad: {_velocity.magnitude}");
 
         if (_rb != null)
         {

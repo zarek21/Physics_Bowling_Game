@@ -1,24 +1,53 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/_Project/UI/GameScene/GameSceneStyles.uss?fileID=7433441132597879392&amp;guid=66cbbbd77d02836489178ece3b581563&amp;type=3#GameSceneStyles"/>
-    <ui:VisualElement name="RootContainer" class="RootContainer">
-        <ui:VisualElement name="SliderContainer" class="SliderContainer">
-            <ui:VisualElement class="FrictionLabelContainer">
+    <Style src="project://database/Assets/_Project/UI/GlobalStyles.uss"/>
+    <Style src="project://database/Assets/_Project/UI/GameScene/GameSceneStyles.uss"/>
+    <ui:VisualElement name="RootContainer" class="RootContainer" picking-mode="Ignore">
+        <ui:VisualElement name="SliderContainer" class="SliderContainer" picking-mode="Ignore">
+            <ui:VisualElement class="FrictionLabelContainer" picking-mode="Ignore" style="flex-direction: row; align-items: center; justify-content: center;">
+                <ui:Label name="LevelLabel" text="NIVEL 1" class="FrictionLabel" style="margin-right: 15px; padding-right: 15px; border-right-width: 2px; border-right-color: rgba(255, 255, 255, 0.35);"/>
                 <ui:Label name="FrictionLabel" text="FRICCIÓN: 0.040" class="FrictionLabel"/>
             </ui:VisualElement>
             
-            <ui:Slider name="FrictionSlider" value="0.04" low-value="0.02" high-value="0.08" class="Slider"/>
+            <ui:Slider name="FrictionSlider" value="0.10" low-value="0.00" high-value="2.00" class="Slider"/>
             
-            <ui:VisualElement name="InstructionsContainer" class="InstructionsContainer">
-                <ui:VisualElement class="InstructionRow">
+            <ui:VisualElement name="InstructionsContainer" class="InstructionsContainer" picking-mode="Ignore">
+                <ui:VisualElement class="InstructionRow" picking-mode="Ignore">
                     <ui:VisualElement class="KeyIcon AKey"/>
                     <ui:VisualElement class="KeyIcon DKey"/>
                     <ui:Label text="APUNTAR" class="InstructionText"/>
                 </ui:VisualElement>
                 
-                <ui:VisualElement class="InstructionRow" style="margin-right: 0;">
+                <ui:VisualElement class="InstructionRow" style="margin-right: 0;" picking-mode="Ignore">
                     <ui:VisualElement class="KeyIcon SpaceKey"/>
                     <ui:Label text="LANZAR" class="InstructionText"/>
                 </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:Button name="ResetThrowButton" class="ResetThrowButton" text="REINICIAR" />
+
+        <!-- Barra de Progreso de Victoria -->
+        <ui:VisualElement name="VictoryProgressContainer" class="VictoryProgressContainer" style="display: none;">
+            <ui:Label name="VictoryProgressLabel" text="ESTABILIZANDO EN ZONA: 0.0s / 2.5s" class="VictoryProgressLabel" />
+            <ui:VisualElement name="VictoryProgressBarBg" class="VictoryProgressBarBg">
+                <ui:VisualElement name="VictoryProgressBarFill" class="VictoryProgressBarFill" style="width: 0%;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Pantalla de Victoria -->
+        <ui:VisualElement name="WinContainer" class="ModalContainer" style="display: none;">
+            <ui:VisualElement class="ModalContent">
+                <ui:Label name="WinTitle" text="VICTORIA" class="ModalTitle WinTitle"/>
+                <ui:Button name="WinRetryButton" text="SIGUIENTE NIVEL" class="ModalButton"/>
+                <ui:Button name="WinMainMenuButton" text="VOLVER AL MENÚ" class="ModalButton" style="display: none;"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Pantalla de Derrota / Reintentar -->
+        <ui:VisualElement name="LoseContainer" class="ModalContainer" style="display: none;">
+            <ui:VisualElement class="ModalContent">
+                <ui:Label text="INTÉNTALO DE NUEVO" class="ModalTitle LoseTitle"/>
+                <ui:Button name="RetryButton" text="REINTENTAR" class="ModalButton"/>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

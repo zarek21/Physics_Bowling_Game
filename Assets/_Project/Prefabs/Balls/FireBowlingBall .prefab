@@ -146,7 +146,7 @@ MonoBehaviour:
   Force: {x: 5, y: 0, z: 0}
   Friction: 0
   Radius: 0.11
-  KeyboardAimSpeed: 30
+  KeyboardAimSpeed: 5
   MaxAimAngle: 30
 --- !u!54 &3101364565319463025
 Rigidbody:
