@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: f531e09e2ad2fb440b4eed7605863143, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -322,17 +322,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   Levels:
   - LevelName: One
-    WinZonePrefab: {fileID: 7275582900409706994, guid: 3449bf38a5c37d44e975407092e7fdd5, type: 3}
+    WinZonePrefab: {fileID: 872103382895925486, guid: 79308d29e6d0f3141a9468931dab6d4c, type: 3}
     WinZonePosition: {x: 0.7, y: 0.207, z: -18.899}
     CustomForce: {x: 3, y: 0, z: 0}
   - LevelName: Two
-    WinZonePrefab: {fileID: 7275582900409706994, guid: 3449bf38a5c37d44e975407092e7fdd5, type: 3}
+    WinZonePrefab: {fileID: 6792649348919941469, guid: e6019c7e13cd7444aa9e8efeebf1d646, type: 3}
     WinZonePosition: {x: -1.05, y: 0.224, z: -18.894}
     CustomForce: {x: 5, y: 0, z: 0}
   - LevelName: Three
-    WinZonePrefab: {fileID: 3678585352227568958, guid: e6019c7e13cd7444aa9e8efeebf1d646, type: 3}
-    WinZonePosition: {x: -1.95, y: 0.234, z: -18.911}
-    CustomForce: {x: 4, y: 0, z: 0}
+    WinZonePrefab: {fileID: 1199534814576946992, guid: f4eaf065e94cfbd41a4486de57c782af, type: 3}
+    WinZonePosition: {x: 0.258, y: 0.202, z: -19.4}
+    CustomForce: {x: 8, y: 0, z: 0}
   - LevelName: Four
     WinZonePrefab: {fileID: 8335302481572666097, guid: eedd2fa04b987f147b1344084c2f1df6, type: 3}
     WinZonePosition: {x: -4.21, y: 0.218, z: -19.19}
@@ -554,6 +554,10 @@ PrefabInstance:
     - target: {fileID: 372977229605917182, guid: 9972bdb12fb45a1498124e9b2eaed8d7, type: 3}
       propertyPath: m_Name
       value: PlasmaBowlingBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763781437698107911, guid: 9972bdb12fb45a1498124e9b2eaed8d7, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317895323257808354, guid: 9972bdb12fb45a1498124e9b2eaed8d7, type: 3}
       propertyPath: m_LocalPosition.x

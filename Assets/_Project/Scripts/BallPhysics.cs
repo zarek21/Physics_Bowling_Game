@@ -20,8 +20,6 @@ public class BallPhysics : MonoBehaviour
 
 
     
-    [Tooltip("Gravedad (g)")]
-    private const float GRAVITY = 9.81f;
     private Vector3 _velocity;
     private bool _isMoving;
 
@@ -93,7 +91,7 @@ public class BallPhysics : MonoBehaviour
 
         // Única ley física aplicada en el script: Desaceleración por fricción cinética
         // Fórmula: a = μ * g
-        float _deceleration = Friction * GRAVITY;
+        float _deceleration = Friction * Mathf.Abs(Physics.gravity.y);
 
         if (_velocity.magnitude > 0.1f)
         {
@@ -119,7 +117,6 @@ public class BallPhysics : MonoBehaviour
         {
             transform.position += _velocity * Time.fixedDeltaTime;
         }
-
         // La rotación visual del giro se calcula a partir de la velocidad
         if (_velocity.magnitude > 0.01f && BallMesh != null)
         {

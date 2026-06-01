@@ -1,90 +1,236 @@
-% !TEX root = SalemeZarek_ReporteIndividual_Mecanica.tex
-\documentclass[10pt,a4paper,twocolumn]{article}
+\documentclass[11pt,letterpaper,twocolumn]{article}
+
 \usepackage[utf8]{inputenc}
-\usepackage[spanish]{babel}
-\usepackage{graphicx}
-\usepackage{amsmath}
+\usepackage[spanish,es-tabla]{babel}
 \usepackage{amssymb}
-\usepackage{amsfonts}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{verbatim}
+\usepackage{charter}
+\usepackage{amsmath}
+\usepackage{appendix}
+\usepackage{ragged2e}
+\usepackage{array}
+\usepackage{etoolbox}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{arydshln}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage{dirtytalk}
+\geometry{
+  top=1.2in,            
+  inner=0.5in,
+  outer=0.5in,
+  bottom=0.9in,
+  headheight=48pt,       
+  headsep=20pt,         
+}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{multirow}
+\usepackage{pdfpages}
+\usepackage{subfiles}
+\usepackage[compact]{titlesec}
+\usepackage{stfloats}
 \usepackage{hyperref}
+\usepackage{fancyvrb}
 
+\hypersetup{colorlinks=true, linkcolor=black, urlcolor=black}
 
-\usepackage[margin=2cm]{geometry}
-\setlength{\columnsep}{1cm}
+\spanishdecimal{.}
+
+\setlength{\columnsep}{30pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyfoot{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0mm}
+\renewcommand{\footrulewidth}{0mm}
+
+\makeatletter
+\patchcmd{\headrule}{\hrule}{\color{black}\hrule}{}{}
+\patchcmd{\footrule}{\hrule}{\color{black}\hrule}{}{}
+\makeatother
+
+\definecolor{blueM}{cmyk}{1.0,0.49,0.0,0.47}
+
+\setlength{\headwidth}{\textwidth}
+
+\chead[C]{
+      \begin{tabular}{m{2.5cm}m{11.3cm}m{3.5cm}}
+      \includegraphics[width=\linewidth,keepaspectratio]{logo_amerike.png}
+      &
+      \centering
+      \fcolorbox{white}{blueM}{\fbox{\begin{minipage}{10.8cm}
+      \centering
+      \textcolor{white}{\textbf{Mecánica}}
+      \end{minipage}}}
+          &
+         \centering
+          \tiny{ \vspace{2.5mm} Desarrollo de Software\\
+           Ciclo escolar: 2026A\\
+           }\tabularnewline
+          \hline
+          \end{tabular}
+    }
 
 \begin{document}
 
+\twocolumn[\begin{@twocolumnfalse}
+\begin{minipage}{0.15\textwidth}
+    {\includegraphics[width=\linewidth,keepaspectratio]{logo_amerike.png}}
+\end{minipage}
+\hspace{25pt}
+\begin{minipage}{0.75\textwidth}
+\vspace{5mm}
+    \Large{\textbf{Física de Bolos: Simulación de Fricción}}
+    \vspace{3mm}
+    
+    \large{\textbf{Saleme Gómez, Jorge Zarek}}
+    \vspace{2mm}
+    
+    \large{\textbf{Profesor: Elizabeth Ruvalcaba}} \newline
 
-\twocolumn[
-  \begin{center}
-      \resizebox{3cm}{!}{\includegraphics{logo_amerike.png}}
-      \vspace{0.3cm}
-      
-      \Large \textbf{Universidad Amerike} \\
-      \large \textbf{Materia:} Mecánica \\
-      \large \textbf{Profesora:} Elizabeth Ruvalcaba \\
-      \large \textbf{Alumno:} Jorge Zarek Saleme Gómez \\
-      \vspace{0.4cm}
-      
-      \normalsize \textbf{Abstract} \\
-      \medskip
-      \parbox{0.85\textwidth}{\textit{Este reporte documenta cómo se implementa el uso de físicas mediante código en Unity 6.3 LTS a través del desarrollo de un juego de bolos. La mecánica principal analizada es el lanzamiento y deslizamiento de la bola de boliche, la cual aplica la segunda ley de Newton.}}
-      \vspace{0.6cm}
-  \end{center}
-]
+    \fontsize{0.35cm}{0.5cm}\selectfont \textit{Ing. en Desarrollo de Software Interactivo y Videojuegos. Amerike.\newline 
+    C. Montemorelos 3503, Rinconada de la Calma, 45080 Zapopan, Jal.}\newline
 
+    \today
+
+\end{minipage}
+
+\small
+\vspace{11pt}
+\centerline{\rule{0.95\textwidth}{0.4pt}}
+
+\begin{center}
+    \begin{minipage}{0.9\textwidth}
+        \noindent \textbf{Resumen:} Este reporte documenta el diseño e implementación de un simulador físico de bolos en Unity. La mecánica principal consiste en el frenado progresivo de la bola mediante una simulación de fricción usando la fórmula de la fricción aproximada basada en la Segunda Ley de Newton, anulando el motor de físicas por defecto de Unity.         
+    \end{minipage}
+\end{center}
+
+\centerline{\rule{0.95\textwidth}{0.4pt}}
+
+\vspace{15pt}
+\end{@twocolumnfalse}]
 
 \section{Introducción}
-El proyecto es un juego de bolos donde el objetivo es superar cada nivel; esto se logra derribando ``X'' cantidad determinada de bolos según el nivel. Al ser de tipo arcade, la simulación de la física es aproximada, evitando simular físicas complejas que contemplan muchas más variables y propiedades. El principal objetivo del proyecto es lograr demostrar el uso de físicas aplicadas mediante programación. En este caso, el principio de física utilizado es la Segunda Ley de Newton, el cual aplica la desaceleración del objeto provocada por una fuerza externa, en este caso la fricción de la pista.
+El presente proyecto es un videojuego de bolos de tipo arcade desarrollado en Unity. La experiencia de juego se estructura a través de 5 niveles en los cuales el jugador debe controlar el tiro de la bola para superar retos. Al ser una simulación arcade, se evitan cálculos complejos que toman en cuenta termodinámica y factores externos que afectan a la bola, y se prioriza una experiencia arcade con una simulación física que sea lo mas cercana a la realidad posible.
 
-Dado que, después del momento de lanzamiento, ya no existe una fuerza de empuje que impulse la bola hacia adelante, la ecuación se define únicamente por la fuerza de fricción actuando hacia el lado opuesto de la dirección en que se lanzó:
-\[ -\mu_k \cdot m \cdot g = m \cdot a \]
-
+El principio físico fundamental aplicado es la Segunda Ley de Newton para modelar la desaceleración del objeto provocada por la fricción de la pista. Dado que, tras el instante del lanzamiento, ya no existe una fuerza de empuje que impulse la bola, la única fuerza actuando sobre el eje del movimiento es la fuerza de fricción, la cual se opone a la dirección del avance:
+\begin{equation}
+    f_k = -\mu_k \cdot N
+\end{equation}
 \section{Marco Teórico}
-El comportamiento de la bola de boliche se desarrolló a través de dos áreas de la mecánica clásica: la dinámica y la cinemática.
+El comportamiento de la bola de bolos se analiza a través de la dinámica clásica y la cinemática de movimiento lineal.
 
 \subsection{Dinámica y Fuerza de Fricción}
-La Segunda Ley de Newton establece que el movimiento de un objeto en una dirección determinada se verá afectado por una fuerza externa. En este proyecto, esa fuerza externa es la fricción de la madera que existe en el plano sobre el cual se desliza la bola.
+La Segunda Ley de Newton establece que la aceleración de un cuerpo es directamente proporcional a la fuerza neta actuando sobre él. En este proyecto, la fuerza neta es la fricción entre la bola y la superficie de la pista.
 
-Para calcular su efecto, igualamos la fuerza fundamental ($\sum F = m \cdot a$) con la fórmula de la fricción cinética ($f_k = \mu_k \cdot N$). La Fuerza Normal ($N$) es igual a la masa por la gravedad ($m \cdot g$). Al empujar en dirección contraria al avance de la bola, se le asigna un signo negativo:
-\[ -\mu_k \cdot (m \cdot g) = m \cdot a \]
+La fuerza normal ($N$) sobre un plano horizontal es igual al peso de la bola ($m \cdot g$). Dado que la fuerza de fricción ($f_k$) es proporcional a la normal ($f_k \propto N$), podemos definirla con la constante de la fricción($\mu_k$):
+\begin{equation}
+    f_k = -\mu_k \cdot (m \cdot g)
+\end{equation}
+Al igualar con la ecuación de la fuerza fundamental ($\sum F = m \cdot a$), obtenemos:
+\begin{equation}
+    -\mu_k \cdot m \cdot g = m \cdot a
+\end{equation}
+Debido a que la masa ($m$) se encuentra multiplicando en ambos lados de la ecuación, se cancela mutuamente. Esto demuestra que la desaceleración es independiente de la masa de la bola, reduciendo la fórmula a:
+\begin{equation}
+    a = -\mu_k \cdot g
+\end{equation}
 
-Debido a que la masa ($m$) se encuentra multiplicando en ambos lados de la igualdad, se cancela. Esto nos demuestra que la desaceleración no depende del peso de la bola, quedando la fórmula de la siguiente manera:
-\[ a = -\mu_k \cdot g \]
+\subsection{Cinemática Lineal}
+Para determinar la velocidad final ($v_f$) de la bola en cualquier instante de tiempo ($t$) bajo una desaceleración constante ($a$), aplicamos la fórmula de movimiento rectilíneo uniformemente acelerado (MRUA):
+\begin{equation}
+    v_f = v_i + a \cdot t
+\end{equation}
+En el código del videojuego, esta fórmula cinemática se calcula restando de forma incremental la desaceleración en cada paso de simulación física (\texttt{Time.fixedDeltaTime}).
 
-\subsection{Cinemática}
-Para conocer la velocidad final de la bola en un segundo determinado mientras se va frenando de manera constante, podemos aplicar la fórmula de la cinemática:
-\[ v_f = v_i + a \cdot t \]
 
-En nuestro código, la fórmula de fricción cinética aproximada se representa calculando primero la desaceleración:
-\begin{center}
-\texttt{float \_deceleration = Friction * Gravity;}
-\end{center}
-
-En esta línea y el código en general no tomamos en cuenta la masa, porque al compararla con la normal de nuestra fórmula de fricción aproximada, notamos que la masa está en ambos lados, por lo que se cancela. Esto nos quiere decir que la aceleración y desaceleración son totalmente independientes de la masa del objeto.
-
-Para aplicar este freno, utilizamos la siguiente línea clave:
-\begin{center}
-\texttt{\_velocity -= \_velocity.normalized * \_deceleration * Time.fixedDeltaTime;}
-\end{center}La función \texttt{.normalized} convierte el vector de velocidad en un vector unitario, permitiendo que el cálculo de fricción simule un frenado gradual y no exagerado. De esta manera, aunque la velocidad original sea muy alta, la fricción mantiene una desaceleración constante sin producir frenados bruscos o poco realistas.
-
-\newpage
-Finalmente, esta fórmula se ve aplicada directamente en nuestra línea de código de traslación dentro de Unity:
-\begin{center}
-  \texttt{transform.position += \_velocity * Time.fixedDeltaTime;}
-\end{center}
-En dicho código obtenemos la última posición de nuestro objeto (la bola de boliche) y el código calcula cómo va perdiendo velocidad cada 0.02 segundos, hasta a una velocidad final de 0.
 
 \section{Metodología}
 
+\subsection{Experimentación (Físicas en la Vida Real)}
+En la vida real al jugar bolos noté cómo la fricción actúa según la fuerza con que lance la bola y el tipo de suelo sobre el que se lanza; mientras más fuerza, más tardaba en frenarse y por el tipo de suelo y aceite se deslizaba mejor. Probé en otros carriles intentando aplicar la misma fuerza y pude notar cómo algunos tenían más o menos aceite. También el peso de la bola afectaba esto, por lo que en el videojuego, usando un Rigidbody, definí la masa estándar de una bola de bolos que es de 5 kg.
+
+\subsection{Desarrollo en Unity}
+Para controlar con exactitud las fuerzas, se anuló la fricción del motor PhysX y se reemplazó con cálculos personalizados en el script \texttt{BallPhysics.cs}:
+\begin{enumerate}
+    \item Se creó un \textit{Physic Material} con fricción $0$ y se aplicó a la bola y a la pista.
+    \item Se añadió un componente \textit{Rigidbody} a la bola con \textit{Linear} y \textit{Angular Drag} en $0$, utilizándolo únicamente para la detección de colisiones y la gravedad.
+    \item Los cálculos físicos se programaron dentro del método \texttt{FixedUpdate()}, el cual se ejecuta en un intervalo de tiempo fijo de $0.02\text{ s}$ (\texttt{Time.fixedDeltaTime}), garantizando la consistencia de la simulación.
+\end{enumerate}
 
 \section{Resultados}
+Los resultados de la simulación muestran un comportamiento orgánico simulando el frenado constante según su masa y fuerza de lanzamiento sobre el la bola.
 
+Para revisar el código del proyecto y ver la demostración en video del gameplay, se proporcionan los siguientes enlaces:
+\begin{itemize}
+    \item \textbf{Repositorio de GitHub:} \href{https://github.com/ZarekSaleme/Physics_Bowling_Game}{Enlace al Código}
+    \item \textbf{Demostración en YouTube:} \href{https://youtube.com/watch?v=FisicaBowlingZarek}{Enlace al Video}
+\end{itemize}
+
+El gameplay consiste en que el jugador selecciona su bola, apunta su tiro usando las teclas A/D y la lanza con barra espacio. El objetivo principal de cada uno de los 5 niveles es que la bola termine su recorrido y se detenga dentro de la zona de victoria por unos segundos (\textit{WinZone}) por al menos $2.5$ segundos. Si la bola sale de la zona tras haber entrado, se produce una derrota instantánea, obligando al jugador a calibrar con cuidado la fuerza y dirección en función de la fricción cinética de la pista.
 
 \section{Conclusiones}
-
+En el desarrollo de este proyecto a lo largo del semestre se demostró la importancia de integrar conceptos teóricos de física en el desarrollo de videojuegos. Al programar la fricción mediante ecuaciones, logramos anular el comportamiento predeterminado del motor de Unity, lo cual nos dio un control absoluto sobre el frenado de la bola. Esto fue de suma utilidad, ya que la fricción cinética no es meramente estética, sino la mecánica central que define el objetivo de los 5 niveles del juego. En resumen, la experiencia consolidó los conocimientos sobre la integración de fórmulas físicas dentro de Unity.
 
 \section{Referencias}
+\begin{thebibliography}{9}
+\bibitem{video1} \textit{Fricción cinética y estática}. [Video]. YouTube. \href{https://www.youtube.com/watch?v=bQrEqR9t9ug}{https://www.youtube.com/watch?v=bQrEqR9t9ug}
+\bibitem{video2} \textit{Introducción a la fuerza de fricción}. [Video]. YouTube. \href{https://www.youtube.com/watch?v=9PPSi1cDerA}{https://www.youtube.com/watch?v=9PPSi1cDerA}
+\bibitem{video3} \textit{Fricción cinética y coeficientes de rozamiento}. [Video]. YouTube. \href{https://www.youtube.com/watch?v=cw37CK8MBGE}{https://www.youtube.com/watch?v=cw37CK8MBGE}
+\bibitem{video4} \textit{Fuerzas de fricción y movimiento}. [Video]. YouTube. \href{https://www.youtube.com/watch?v=hlN5_L9r08g&t=40s}{https://www.youtube.com/watch?v=hlN5\_L9r08g\&t=40s}
+\bibitem{openstax} Ling, S. J., Sanny, J., \& Moebs, W. (2021). \textit{Física Universitaria Volumen 1: Fricción}. OpenStax. \href{https://openstax.org/books/f\%C3\%ADsica-universitaria-volumen-1/pages/6-2-friccion}{https://openstax.org/books/física-universitaria-volumen-1/pages/6-2-friccion}
+\end{thebibliography}
 
+\clearpage
+\onecolumn
+\begin{figure}[H]
+    \centering
+    \begin{BVerbatim}
+    void FixedUpdate()
+    {
+        if(_isMoving == false) return;
+
+        if (_rb != null)
+        {
+            _velocity = _rb.linearVelocity;
+        }
+
+        // Desaceleración personalizada por fricción cinética (a = u * g)
+        float _deceleration = Friction * Mathf.Abs(Physics.gravity.y);
+
+        if (_velocity.magnitude > 0.1f)
+        {
+            // Fórmula Cinemática: vf = vi - a * t (en la dirección contraria del movimiento)
+            _velocity -= _velocity.normalized * _deceleration * Time.fixedDeltaTime;
+        }
+        else
+        {
+            _isMoving = false;
+            _velocity = Vector3.zero;
+            OnBallStopped?.Invoke();
+        }
+
+        if (_rb != null)
+        {
+            _rb.linearVelocity = _velocity;
+        }
+        else
+        {
+            transform.position += _velocity * Time.fixedDeltaTime;
+        }
+
+    }
+    \end{BVerbatim}
+    \caption{Implementación del cálculo de fricción personalizada en FixedUpdate.}
+    \label{fig:fixedupdate-physics}
+\end{figure}
 
 \end{document}

@@ -272,7 +272,7 @@ public class UIManager : MonoBehaviour
                     {
                         if (_winTitleLabel != null)
                         {
-                            _winTitleLabel.text = "Eres el rey de los bolos y la física";
+                            _winTitleLabel.text = "VICTORIA";
                         }
                         if (_winRetryButton != null)
                         {
