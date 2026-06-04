@@ -324,3 +324,33 @@
     margin-bottom: 40px;
     white-space: normal;
 }
+
+/* Botones de Control de Fricción */
+.FrictionStepButton {
+    width: 50px;
+    height: 50px;
+    background-color: #3d1a03;
+    color: #ffffff;
+    font-size: 28px;
+    -unity-font-style: bold;
+    border-radius: 25px;
+    border-width: 3px;
+    border-color: #ffffff;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 3px;
+    transition: scale 0.15s ease-in-out;
+}
+
+.FrictionStepButton:hover {
+    scale: 1.1;
+    background-color: #5a2705;
+}
+
+.FrictionStepButton:active {
+    scale: 0.95;
+    background-color: #f79303;
+    border-color: #f79303;
+}

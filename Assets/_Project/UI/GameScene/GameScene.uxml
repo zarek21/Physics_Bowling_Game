@@ -3,12 +3,16 @@
     <Style src="project://database/Assets/_Project/UI/GameScene/GameSceneStyles.uss"/>
     <ui:VisualElement name="RootContainer" class="RootContainer" picking-mode="Ignore">
         <ui:VisualElement name="SliderContainer" class="SliderContainer" picking-mode="Ignore">
-            <ui:VisualElement class="FrictionLabelContainer" picking-mode="Ignore" style="flex-direction: row; align-items: center; justify-content: center;">
+            <ui:VisualElement class="FrictionLabelContainer" picking-mode="Ignore" style="flex-direction: row; align-items: center; justify-content: center; align-self: center;">
                 <ui:Label name="LevelLabel" text="NIVEL 1" class="FrictionLabel" style="margin-right: 15px; padding-right: 15px; border-right-width: 2px; border-right-color: rgba(255, 255, 255, 0.35);"/>
                 <ui:Label name="FrictionLabel" text="FRICCIÓN: 0.040" class="FrictionLabel"/>
             </ui:VisualElement>
             
-            <ui:Slider name="FrictionSlider" value="0.10" low-value="0.00" high-value="2.00" class="Slider"/>
+            <ui:VisualElement style="flex-direction: row; align-items: center; justify-content: center; width: 100%; margin-top: 15px;">
+                <ui:Button name="FrictionDecreaseButton" text="&lt;" class="FrictionStepButton" style="margin-top: 4px;"/>
+                <ui:Slider name="FrictionSlider" value="0.10" low-value="0.00" high-value="2.00" class="Slider" style="flex-grow: 1; margin-left: 20px; margin-right: 20px; margin-top: 0;"/>
+                <ui:Button name="FrictionIncreaseButton" text="&gt;" class="FrictionStepButton" style="margin-top: 4px;"/>
+            </ui:VisualElement>
             
             <ui:VisualElement name="InstructionsContainer" class="InstructionsContainer" picking-mode="Ignore">
                 <ui:VisualElement class="InstructionRow" picking-mode="Ignore">

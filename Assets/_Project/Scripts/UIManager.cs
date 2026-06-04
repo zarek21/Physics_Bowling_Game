@@ -126,6 +126,23 @@ public class UIManager : MonoBehaviour
                         BallPhysics.SetFriction(evt.newValue);
                     }
                 });
+
+                var decreaseButton = root.Q<Button>("FrictionDecreaseButton");
+                var increaseButton = root.Q<Button>("FrictionIncreaseButton");
+                
+                if (decreaseButton != null)
+                {
+                    decreaseButton.clicked += () => {
+                        frictionSlider.value = Mathf.Clamp(frictionSlider.value - 0.01f, frictionSlider.lowValue, frictionSlider.highValue);
+                    };
+                }
+                
+                if (increaseButton != null)
+                {
+                    increaseButton.clicked += () => {
+                        frictionSlider.value = Mathf.Clamp(frictionSlider.value + 0.01f, frictionSlider.lowValue, frictionSlider.highValue);
+                    };
+                }
             }
         }
 
