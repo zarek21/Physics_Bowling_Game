@@ -50,5 +50,17 @@
                 <ui:Button name="RetryButton" text="REINTENTAR" class="ModalButton"/>
             </ui:VisualElement>
         </ui:VisualElement>
+
+        <!-- Pantalla de Cómo Jugar -->
+        <ui:VisualElement name="HowToPlayContainer" class="ModalContainer" style="display: none;">
+            <ui:VisualElement class="ModalContent HowToPlayContent">
+                <ui:VisualElement class="HowToPlayHeader">
+                    <ui:VisualElement class="InfoIcon"/>
+                    <ui:Label text="CÓMO JUGAR" class="ModalTitle HowToPlayTitle"/>
+                </ui:VisualElement>
+                <ui:Label text="El objetivo es lanzar la bola de bolos y lograr que se detenga exactamente dentro de la zona de victoria iluminada por al menos 2.5 segundos.&#10;&#10;Ajusta el control de fricción en la pantalla para cambiar el comportamiento del suelo y lograr frenar la bola a tiempo." class="HowToPlayDescription"/>
+                <ui:Button name="HowToPlayPlayButton" text="JUGAR" class="ModalButton"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

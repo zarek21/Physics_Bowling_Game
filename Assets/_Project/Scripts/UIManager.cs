@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     private Button _retryButton;
     private Button _resetThrowButton;
     private Button _winMainMenuButton;
+    private Button _howToPlayPlayButton;
 
     
     private VisualElement _selectionContainer;
@@ -21,6 +22,7 @@ public class UIManager : MonoBehaviour
     private VisualElement _sliderContainer;
     private VisualElement _winContainer;
     private VisualElement _loseContainer;
+    private VisualElement _howToPlayContainer;
 
     private Label _winTitleLabel;
     private Label _levelLabel;
@@ -63,6 +65,7 @@ public class UIManager : MonoBehaviour
             _sliderContainer = root.Q<VisualElement>("SliderContainer");
             _winContainer = root.Q<VisualElement>("WinContainer");
             _loseContainer = root.Q<VisualElement>("LoseContainer");
+            _howToPlayContainer = root.Q<VisualElement>("HowToPlayContainer");
 
             _victoryProgressContainer = root.Q<VisualElement>("VictoryProgressContainer");
             _victoryProgressLabel = root.Q<Label>("VictoryProgressLabel");
@@ -77,11 +80,13 @@ public class UIManager : MonoBehaviour
             _retryButton = root.Q<Button>("RetryButton");
             _resetThrowButton = root.Q<Button>("ResetThrowButton");
             _winMainMenuButton = root.Q<Button>("WinMainMenuButton");
+            _howToPlayPlayButton = root.Q<Button>("HowToPlayPlayButton");
 
             if (_winRetryButton != null) _winRetryButton.clicked += LoadNextLevelOrReset;
             if (_retryButton != null) _retryButton.clicked += ReloadLevel;
             if (_resetThrowButton != null) _resetThrowButton.clicked += ReloadLevel;
             if (_winMainMenuButton != null) _winMainMenuButton.clicked += GoToMainMenu;
+            if (_howToPlayPlayButton != null) _howToPlayPlayButton.clicked += CloseHowToPlayAndStart;
 
             var frictionSlider = root.Q<Slider>("FrictionSlider");
             var levelForceLabel = root.Q<Label>("LevelForceLabel");
@@ -227,6 +232,14 @@ public class UIManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("BallSelectionScreen");
     }
 
+    private void CloseHowToPlayAndStart()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.CompleteHowToPlay();
+        }
+    }
+
     private void LoadNextLevelOrReset()
     {
         if (GameManager.Instance != null)
@@ -254,6 +267,7 @@ public class UIManager : MonoBehaviour
         if (_sliderContainer != null) _sliderContainer.style.display = DisplayStyle.None;
         if (_winContainer != null) _winContainer.style.display = DisplayStyle.None;
         if (_loseContainer != null) _loseContainer.style.display = DisplayStyle.None;
+        if (_howToPlayContainer != null) _howToPlayContainer.style.display = DisplayStyle.None;
         if (_resetThrowButton != null) _resetThrowButton.style.display = DisplayStyle.None;
         if (_victoryProgressContainer != null) _victoryProgressContainer.style.display = DisplayStyle.None;
         if (_winMainMenuButton != null) _winMainMenuButton.style.display = DisplayStyle.None;
@@ -314,6 +328,10 @@ public class UIManager : MonoBehaviour
             if (_slidersContainer != null && newState == GameState.WaitingThrow) _slidersContainer.style.display = DisplayStyle.Flex;
             if (_sliderContainer != null && newState == GameState.WaitingThrow) _sliderContainer.style.display = DisplayStyle.Flex;
             if (_resetThrowButton != null) _resetThrowButton.style.display = DisplayStyle.Flex;
+        }
+        else if (newState == GameState.HowToPlay)
+        {
+            if (_howToPlayContainer != null) _howToPlayContainer.style.display = DisplayStyle.Flex;
         }
     }
 
@@ -384,5 +402,6 @@ public class UIManager : MonoBehaviour
         if (_retryButton != null) _retryButton.clicked -= ReloadLevel;
         if (_resetThrowButton != null) _resetThrowButton.clicked -= ReloadLevel;
         if (_winMainMenuButton != null) _winMainMenuButton.clicked -= GoToMainMenu;
+        if (_howToPlayPlayButton != null) _howToPlayPlayButton.clicked -= CloseHowToPlayAndStart;
     }
 }

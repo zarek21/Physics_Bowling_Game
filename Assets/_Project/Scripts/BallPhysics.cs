@@ -46,6 +46,15 @@ public class BallPhysics : MonoBehaviour
     {
         if (_isLaunched) return;
 
+        if (GameManager.Instance != null && GameManager.Instance.CurrentState != GameState.WaitingThrow)
+        {
+            if (AimLine != null && AimLine.enabled)
+            {
+                AimLine.enabled = false;
+            }
+            return;
+        }
+
         float aimInput = 0f;
         if (Keyboard.current != null)
         {

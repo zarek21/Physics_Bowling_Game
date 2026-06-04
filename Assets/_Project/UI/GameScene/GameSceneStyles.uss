@@ -283,3 +283,44 @@
     border-radius: 8px;
     transition: width 0.05s ease-out;
 }
+
+/* Estilos de la Pantalla Cómo Jugar */
+.HowToPlayContent {
+    width: 750px;
+    background-color: rgba(61, 26, 3, 0.95);
+    border-color: #f79303;
+    border-width: 3px;
+    border-radius: 30px;
+    padding: 55px;
+    align-items: center;
+}
+
+.HowToPlayHeader {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.InfoIcon {
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+    background-image: url("project://database/Assets/_Project/UI/GameScene/info-icon.svg");
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.HowToPlayTitle {
+    color: #f79303;
+    font-size: 46px;
+    margin: 0;
+    -unity-font-style: bold;
+}
+
+.HowToPlayDescription {
+    color: #ffffff;
+    font-size: 24px;
+    -unity-text-align: middle-center;
+    margin-bottom: 40px;
+    white-space: normal;
+}

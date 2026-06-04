@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public enum GameState
 {
     BallSelection,
+    HowToPlay,
     WaitingThrow,
     BowlSpinning,
     Win,
@@ -60,6 +61,7 @@ public class GameManager : MonoBehaviour
     private Vector3 _originalWinZonePos;
     private bool _hasSavedOriginalPos = false;
     private GameObject _instantiatedWinZoneObj;
+    private bool _hasShownHowToPlay = false;
 
     private void Awake()
     {
@@ -94,7 +96,14 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            ChangeState(GameState.WaitingThrow);
+            if (!_hasShownHowToPlay)
+            {
+                ChangeState(GameState.HowToPlay);
+            }
+            else
+            {
+                ChangeState(GameState.WaitingThrow);
+            }
         }
     }
 
@@ -112,6 +121,24 @@ public class GameManager : MonoBehaviour
     {
         _hasSavedOriginalPos = false;
         _instantiatedWinZoneObj = null;
+
+        if (scene.name == "BallSelectionScreen")
+        {
+            ChangeState(GameState.BallSelection);
+            ResetHowToPlay();
+        }
+        else if (scene.name == "GameScene")
+        {
+            if (!_hasShownHowToPlay)
+            {
+                ChangeState(GameState.HowToPlay);
+            }
+            else
+            {
+                ChangeState(GameState.WaitingThrow);
+            }
+        }
+
         ApplyLevelConfig();
     }
 
@@ -119,6 +146,17 @@ public class GameManager : MonoBehaviour
     {
         CurrentState = newState;
         OnStateChanged?.Invoke(CurrentState);
+    }
+
+    public void CompleteHowToPlay()
+    {
+        _hasShownHowToPlay = true;
+        ChangeState(GameState.WaitingThrow);
+    }
+
+    public void ResetHowToPlay()
+    {
+        _hasShownHowToPlay = false;
     }
 
     public LevelConfig GetCurrentLevelConfig()
